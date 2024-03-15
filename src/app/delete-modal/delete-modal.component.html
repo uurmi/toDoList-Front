@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Deleting</h2>
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+      <p>Are you sure you want to delete this item ?</p>
+    </div>
+    <div class="button-group align-items-center"></div>
+    <button type="button" (click)="onDelete()" [mat-dialog-close]="true" class="btn btn-danger">
+      Delete
+    </button>
+    <button type="button" mat-dialog-close class="btn btn-secondary">
+      Cancel
+    </button>
+  </div>
+</div>

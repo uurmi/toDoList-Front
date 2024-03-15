@@ -1,0 +1,157 @@
+h6 {
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #212529;
+    font-size: 1rem;
+
+}
+
+.card-options>.mat-icon:hover {
+    box-shadow: 0 0 11px rgba(20, 20, 20, 0.5);
+    border-radius: 50%;
+}
+
+.card-list {
+    margin: 10px;
+    border-radius: 0.5rem;
+    padding: .75rem;
+    background: #dee2e6;
+    width: 300px;
+    justify-content: space-around;
+}
+
+.card-list-body {
+    overflow: auto;
+    max-height: 59vh;
+    padding: 4px 0px;
+}
+
+.doneDate {
+    color: green;
+    justify-content: space-around;
+}
+
+.card-list-header {
+    display: block;
+    position: relative;
+}
+
+.card-list-header .card-options {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.card-list-header .card-options .option {
+    margin-left: 0.25rem;
+}
+
+.card-options>.mat-icon {
+    margin-right: 0.5rem;
+    box-shadow: none;
+    border-radius: 50%;
+    transition: box-shadow 1s ease-out;
+}
+
+.card-options>.mat-icon:hover {
+    box-shadow: 0 0 11px rgba(20, 20, 20, 0.5);
+    border-radius: 50%;
+}
+
+.card {
+    margin-bottom: 0.75rem;
+    box-shadow: 0 0.1875rem 0.375rem rgba(33, 37, 41, 0.05);
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+}
+
+.add-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.1875rem 0.375rem rgba(33, 37, 41, 0.05);
+    background-color: #cccccc;
+    background-clip: border-box;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    min-height: 2rem;
+    transition: background-color .5s linear;
+}
+
+.add-item:hover {
+    background-color: #8f8f8f;
+}
+
+.card>.progress {
+    height: 0.1875rem;
+    background: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.card>.progress .progress-bar {
+    height: 1rem;
+    border-radius: .5rem 0 0 0;
+}
+
+.card>.progress .progress-bar[style="width: 100%"] {
+    border-radius: .5rem .5rem 0 0;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.card-body .card-options {
+    position: absolute;
+    top: 1.25rem;
+    right: 1rem;
+}
+
+.card-title {
+    margin-bottom: 1.5rem;
+    max-width: 80%;
+}
+
+.card-list-header>h6 {
+    margin-left: 0.25rem
+}
+
+.card-meta {
+    font-size: .875rem;
+    margin-right: 0.25rem;
+}
+
+.card-meta>.d-flex>mat-icon {
+    margin-right: 0.25rem
+}
+
+.card-list-footer {
+    display: block;
+    position: relative;
+}
+
+.cdk-drag-placeholder {
+    background: #ccc;
+    border: dotted 3px #999;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.card-list-body.cdk-drop-list-dragging .cdk-drag:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

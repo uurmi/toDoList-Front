@@ -1,0 +1,76 @@
+.card {
+    min-height: 400px;
+    min-width: 400px;
+}
+
+.form-check-label {
+    margin-bottom: 7px;
+    font-weight: 550;
+}
+
+.category {
+    font-size: 16px;
+    font-weight: 550;
+    line-height: 20px;
+    font-family: Arial, sans-serif;
+    letter-spacing: .0178571429em;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.card-options>.mat-icon {
+    margin-right: 0.5rem;
+    box-shadow: none;
+    border-radius: 50%;
+    transition: box-shadow 1s ease-out;
+}
+
+.card-options>.mat-icon:hover {
+    box-shadow: 0 0 11px rgba(20, 20, 20, 0.5);
+    border-radius: 50%;
+}
+
+.mat-datepicker-toggle {
+    z-index: 1000;
+  }
+
+.input-group {
+    align-items: center;
+}
+
+.input-group>input {
+    margin: 0.25rem;
+}
+
+.input-group .form-check-input {
+    margin-right: .5rem;
+}
+
+.checkbox-xl {
+    height: 1.25rem;
+    width: 1.25rem
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.add-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.1875rem 0.375rem rgba(33, 37, 41, 0.05);
+    background-color: #cccccc;
+    background-clip: border-box;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    min-height: 2rem;
+}
+
+.add-item:hover {
+    background-color: #8f8f8f;
+}

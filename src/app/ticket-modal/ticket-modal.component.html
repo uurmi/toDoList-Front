@@ -1,0 +1,164 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2 class="card-title">
+      {{ ticket ? "Editing Ticket" : "Creating Ticket" }}
+    </h2>
+    <div class="card-options">
+      <mat-icon
+        class="mat-icon"
+        fontIcon="add_alarm"
+        color="primary"
+        (click)="addDeadline()"
+        *ngIf="!deadline"
+      ></mat-icon>
+      <mat-icon
+        class="mat-icon"
+        fontIcon="format_list_bulleted"
+        color="primary"
+        (click)="addSteps()"
+        *ngIf="!steps?.length"
+      ></mat-icon>
+      <mat-icon
+        class="mat-icon"
+        fontIcon="check_circle_outline"
+        style="color: green"
+        (click)="markTicketAsDone()"
+        *ngIf="ticket && !ticket.done"
+      ></mat-icon>
+      <mat-icon
+        class="mat-icon"
+        fontIcon="delete_forever"
+        color="warn"
+        (click)="openDeleteModal()"
+        *ngIf="ticket"
+      ></mat-icon>
+    </div>
+  </div>
+  <div class="card-body mat-dialog-content" mat-dialog-content>
+    <form [formGroup]="ticketForm" *ngIf="ticketForm">
+      <div class="form-group col-md-12">
+        <div class="mb-3">
+          <label class="form-check-label" for="name"> Title </label>
+          <input
+            class="form-control"
+            placeholder="New Ticket"
+            formControlName="name"
+            type="text"
+            id="name"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-check-label" for="description">
+            Description
+          </label>
+          <textarea
+            placeholder="Description"
+            class="form-control"
+            formControlName="description"
+            id="description"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <div class="form-check-label">
+            <label class="form-check-label"> Category </label>
+          </div>
+          <div
+            class="form-check form-check-inline"
+            *ngFor="let category of categories"
+          >
+            <input
+              type="radio"
+              checked
+              formControlName="category"
+              class="form-check-input"
+              [value]="category['name']"
+            />
+            <label class="category"> {{ category["name"] }} </label>
+          </div>
+        </div>
+
+        <div class="mb-3 datepicker" *ngIf="deadline">
+          <div class="d-flex justify-content-between">
+            <div class="form-check-label">
+              <label for="deadline"> Deadline </label>
+            </div>
+            <div class="card-options">
+              <mat-icon color="warn" (click)="removeDeadline()" class="mat-icon"
+                >clear</mat-icon
+              >
+            </div>
+          </div>
+          <mat-form-field
+            appearance="outline"
+            color="primary"
+            subscriptSizing="dynamic"
+          >
+            <mat-label class="form-check-label">Choose a date </mat-label>
+            <input
+              matInput
+              class="form-control"
+              [matDatepicker]="picker"
+              formControlName="deadline"
+              id="deadline"
+            />
+            <mat-datepicker-toggle matIconSuffix [for]="$any(picker)">
+            </mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+            ></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-3" *ngIf="steps?.length">
+          <div class="d-flex justify-content-between">
+            <div class="form-check-label">
+              <label for="steps"> Steps </label>
+            </div>
+            <div class="card-options">
+              <mat-icon color="primary" (click)="addStep()" class="mat-icon"
+                >playlist_add</mat-icon
+              >
+              <mat-icon color="warn" (click)="removeSteps()" class="mat-icon"
+                >clear</mat-icon
+              >
+            </div>
+          </div>
+          <div
+            class="input-group"
+            *ngFor="let step of steps?.controls; index as i"
+          >
+            <input
+              class="form-check-input checkbox-xl"
+              type="checkbox"
+              [value]="getControlValueByIndex(stepsChecked, i)"
+              [formControl]="getControlByIndex(stepsChecked, i)"
+            />
+            <input
+              placeholder="New Step"
+              type="text"
+              class="form-control"
+              value="{{ step.value }}"
+              [formControl]="getControlByIndex(steps, i)"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="saveTicket()"
+        [mat-dialog-close]="true"
+      >
+        OK
+      </button>
+      <button type="button" class="btn btn-danger" mat-dialog-close>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

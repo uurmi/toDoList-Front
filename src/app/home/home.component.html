@@ -1,0 +1,61 @@
+<div class="navbar bg-dark sticky-top">
+  <a href="#" class="nav-item">
+    <img src="assets/img/cartman.svg" class="cartman" />
+  </a>
+
+  <div class="nav-item">
+    <span class="bigTitle">To Do List</span>
+  </div>
+
+  <a href="#" class="nav-item">
+    <img src="assets/img/cartman.svg" class="cartman" />
+  </a>
+</div>
+
+<div class="container-kanban">
+  <div class="header">
+    <div></div>
+    <div class="page-header">
+      <div>
+        <img src="assets/img/goblin.webp" class="goblin" />
+      </div>
+      <div>
+        <h1 class="home-title">Time is money friend</h1>
+      </div>
+      <div>
+        <img src="assets/img/goblin.webp" class="goblin goblin-reverse" />
+      </div>
+    </div>
+    <div class="add-category">
+      <mat-icon
+        class="mat-icon"
+        (click)="openCategoryModal()"
+        aria-hidden="false"
+        fontIcon="add_box"
+        color="primary"
+      >
+      </mat-icon>
+    </div>
+  </div>
+
+  <div class="flexbox-container" cdkDropListGroup>
+    <div
+      *ngFor="
+        let item of ticketsByCategories;
+        index as i;
+        trackBy: trackCategoryById
+      "
+    >
+      <app-card-list
+        [category]="item.category"
+        [tickets]="item.tickets"
+        (positionChanged)="refreshChild($event)"
+        (categoryDeleted)="removeCategory($event)"
+      >
+      </app-card-list>
+    </div>
+    <div *ngIf="!ticketsByCategories" class="overlay sticky-center" #spinner>
+      <mat-spinner class="center"></mat-spinner>
+    </div>
+  </div>
+</div>

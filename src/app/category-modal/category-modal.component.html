@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2 class="card-title">
+      {{ category ? category.name : "Creating Category" }}
+    </h2>
+    <div class="card-options">
+      <mat-icon
+        class="mat-icon"
+        fontIcon="delete_forever"
+        color="warn"
+        (click)="openDeleteModal()"
+        *ngIf="category"
+      ></mat-icon>
+    </div>
+  </div>
+  <div class="card-body mat-dialog-content" mat-dialog-content>
+    <form [formGroup]="categoryForm" *ngIf="categoryForm">
+      <div class="form-group col-md-12">
+        <div class="mb-3">
+          <label class="form-check-label" for="name"> Title </label>
+          <input
+            class="form-control"
+            placeholder="New Category"
+            formControlName="name"
+            type="text"
+            name="name"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-check-label" for="description">
+            Description
+          </label>
+          <textarea
+            placeholder="Description"
+            class="form-control"
+            formControlName="description"
+            name="description"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-check-label" for="color"> Color </label>
+          <input
+            class="form-control"
+            placeholder="Green"
+            formControlName="color"
+            type="text"
+            name="color"
+          />
+        </div>
+      </div>
+    </form>
+    <br />
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="saveCategory()"
+        [mat-dialog-close]="true"
+      >
+        OK
+      </button>
+      <button type="button" class="btn btn-danger" mat-dialog-close>
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

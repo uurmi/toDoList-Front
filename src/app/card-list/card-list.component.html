@@ -1,0 +1,119 @@
+<div class="card-list" *ngIf="category">
+  <div class="card-list-header">
+    <h6>{{ category.name }}</h6>
+    <div class="card-options" *ngIf="!(category.name == 'Done')">
+      <mat-icon
+        class="mat-icon"
+        (click)="openTicketModal({ category: category.name })"
+        class="option"
+        aria-hidden="false"
+        fontIcon="add"
+        color="primary"
+      ></mat-icon>
+      <mat-icon
+        class="mat-icon"
+        (click)="openCategoryModal(category.name)"
+        class="option"
+        aria-hidden="false"
+        fontIcon="mode_edit"
+        color="primary"
+      ></mat-icon>
+    </div>
+  </div>
+  <div
+    class="card-list-body cdk-drop-list-dragging"
+    cdkScrollable
+    cdkDropListAutoScrollStep="15"
+    cdkDropList
+    [cdkDropListData]="category.name"
+    (cdkDropListDropped)="drop($event)"
+    cdkDropListOrientation="vertical"
+    [@listAnimation]=""
+  >
+    <div
+      *ngFor="
+        let ticket of signalTickets() | sortByPosition;
+        trackBy: trackTicketById
+      "
+      cdkDrag
+      [cdkDragData]="{ id: ticket._id, pos: ticket.position }"
+      class="card cdkDrag cdk-drag-animating"
+    >
+      <div class="progress" *ngIf="ticket.steps">
+        <div
+          class="progress-bar bg-success"
+          role="progressbar"
+          [style.width]="ticketProgress(ticket) + '%'"
+          [ariaValueNow]="ticketProgress(ticket)"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      <div class="card-body">
+        <div class="card-options">
+          <mat-icon
+            class="mat-icon"
+            aria-hidden="false"
+            fontIcon="delete_forever"
+            color="warn"
+            (click)="openDeleteModal(ticket._id)"
+          ></mat-icon>
+        </div>
+
+        <div (click)="openTicketModal({ id: ticket._id })">
+          <div class="card-title">
+            <h6>{{ ticket.name }}</h6>
+          </div>
+
+          <div class="card-meta d-flex justify-content-between">
+            <div
+              class="d-flex align-items-center"
+              *ngIf="ticket.steps; else noSteps"
+            >
+              <mat-icon
+                fontIcon="format_list_bulleted"
+                aria-hidden="false"
+                style="color: rgb(20, 112, 187)"
+              ></mat-icon>
+              <span
+                >{{ ticket.stepsChecked | countSteps }}/{{
+                  ticket.steps.length
+                }}</span
+              >
+            </div>
+            <ng-template class="d-flex align-items-center" #noSteps>
+              <mat-icon
+                fontIcon="task"
+                aria-hidden="false"
+                style="color: rgb(20, 112, 187)"
+              ></mat-icon>
+            </ng-template>
+
+            <span
+              class="text-small d-flex align-items-center doneDate"
+              *ngIf="category.name == 'Done'"
+            >
+              <mat-icon fontIcon="done"></mat-icon>
+              <div>{{ ticket.doneDate | date : "d MMMM" }}</div>
+            </span>
+            <div *ngIf="category.name != 'Done'">
+              <span class="text-small" *ngIf="ticket.deadline; else noDeadline"
+                >Due : {{ ticket.deadline | date : "d MMMM" }}</span
+              >
+              <ng-template #noDeadline> No deadline </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cdk-drag-placeholder" *cdkDragPlaceholder></div>
+  </div>
+  <div class="card-list-footer" *ngIf="!(category.name == 'Done')">
+    <div
+      class="add-item"
+      (click)="openTicketModal({ category: category.name })"
+    >
+      <mat-icon> add </mat-icon>
+    </div>
+  </div>
+</div>
